@@ -22,12 +22,9 @@ function isSolutionValid() {
     'use strict';
 
     if (answer === '' || answer.includes(' ')) {
-        console.log('not valid solution');
         answer = '';
         return false;
     } else {
-        console.log('valid solution');
-        showGame();
         return true;
     }
 }
@@ -43,15 +40,15 @@ function prepareGame() {
     if (isSolutionValid()) {
         document.getElementById('solutionWord').style.display = 'none';
         document.getElementById("solutionButton").style.display = 'none';
+        showGame();
     }
 }
 
-// call prepareGame on button click
+// call prepareGame on button click or return key
 document.getElementById("solutionButton").addEventListener("click", prepareGame);
-document.getElementById("solutionButton").addEventListener("keyup", function (event) {
+document.getElementById("solutionWord").addEventListener("keyup", function (event) {
     'use strict';
-    event.preventDefault();
     if (event.keyCode === 13) {
-        document.getElementById("solutionButton").click(prepareGame);
+        prepareGame();
     }
 });
