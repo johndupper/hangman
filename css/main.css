@@ -3,6 +3,8 @@
 }
 
 .letter {
-    display: none;
+    width: 30px;
+    margin: 0 0.125em;
+    padding: 0.3em;
+    border: 1px solid black;
 }
-
