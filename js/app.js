@@ -1,35 +1,36 @@
 // fix: answer checks for spaces only
-// fix: enter button for solution input
+// fix: input doesn't clear back to placeholder
 
-var console, answer;
+var alert, console, answer;
 
-function showGame() {
+// create game HTML elements
+function createGameHTML() {
     'use strict';
-    console.log('call showGame');
-    var i, letter;
+    
+    var i, letter, checkButton, userGuess;
+    
     for (i  = 1; i <= answer.length; i += 1) {
-        console.log(i);
         letter = document.createElement('input');
         letter.type = 'text';
         letter.className = 'letter';
         letter.id = i;
+        letter.value = '';
+        letter.placeholder = '__';
+        letter.readOnly = true;
         document.body.appendChild(letter);
     }
     
+    userGuess = document.createElement('input');
+    userGuess.type = 'text';
+    userGuess.id = 'userGuess';
+    document.body.appendChild(userGuess);
+    
+    checkButton = document.createElement('input');
+    checkButton.type = 'submit';
+    checkButton.id = 'checkButton';
+    checkButton.value = 'Survey Says...';
+    document.body.appendChild(checkButton);
 }
-
-function isSolutionValid() {
-    'use strict';
-
-    if (answer === '' || answer.includes(' ')) {
-        answer = '';
-        return false;
-    } else {
-        return true;
-    }
-}
-
-
 
 // hide solution input
 function prepareGame() {
@@ -37,18 +38,21 @@ function prepareGame() {
     
     answer = document.getElementById('solutionWord').value;
     
-    if (isSolutionValid()) {
+    if (answer === '' || answer.includes(' ')) {
+        answer = '';
+        alert('Please enter a valid word');
+    } else {
         document.getElementById('solutionWord').style.display = 'none';
-        document.getElementById("solutionButton").style.display = 'none';
-        showGame();
+        document.getElementById('solutionButton').style.display = 'none';
+        createGameHTML();
     }
 }
 
 // call prepareGame on button click or return key
-document.getElementById("solutionButton").addEventListener("click", prepareGame);
-document.getElementById("solutionWord").addEventListener("keyup", function (event) {
+document.getElementById('solutionButton').addEventListener('click', prepareGame);
+document.getElementById('solutionWord').addEventListener('keyup', function (keyboard) {
     'use strict';
-    if (event.keyCode === 13) {
+    if (keyboard.keyCode === 13) {
         prepareGame();
     }
 });
