@@ -1,19 +1,37 @@
-function test() {
-    'use strict';
-}
-test();
+// fix: answer checks for spaces only
+var console, answer;
 
-// create text inputs
-function addInputs() {
+function showGame() {
     'use strict';
-    var i, textBox;
-    for (i = 1; i < 5; i += 1) {
-        textBox = document.createElement('input');
-        textBox.setAttribute('type', 'text');
-        textBox.id = "textbox" + i;
-        textBox.addEventListener('onkeyup', test());
-        document.body.appendChild(textBox);
-        console.log(textBox.id);
+    console.log('call showGame');
+}
+
+function isSolutionValid() {
+    'use strict';
+
+    if (answer.includes(' ')) {
+        console.log('not valid solution');
+        return false;
+    } else {
+        console.log('valid solution');
+        return true;
     }
 }
-addInputs();
+
+
+
+// hide solution input
+function prepareGame() {
+    'use strict';
+    
+    answer = document.getElementById('solutionWord').value;
+    
+    if (isSolutionValid()) {
+        document.getElementById('solutionWord').style.display = 'none';
+        document.getElementById("solutionButton").style.display = 'none';
+        showGame();
+    }
+}
+
+// call prepareGame on button click
+document.getElementById("solutionButton").addEventListener("click", prepareGame);
