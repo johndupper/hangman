@@ -1,5 +1,6 @@
 // fix: answer checks for spaces only
 // fix: input doesn't clear back to placeholder
+// fix: build the picture in css
 
 var alert, console, answer, guess;
 
