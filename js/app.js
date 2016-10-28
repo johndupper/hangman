@@ -13,6 +13,7 @@ function checkLetter() {
     for (i = 0; i < answer.length; i += 1) {
         if (guess === answer.charAt(i)) {
             document.getElementById(i).value = guess;
+            document.getElementById('userGuess').value = '';
         }
     }
 }
