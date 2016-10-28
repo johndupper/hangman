@@ -1,15 +1,30 @@
 // fix: answer checks for spaces only
 // fix: input doesn't clear back to placeholder
 
-var alert, console, answer;
+var alert, console, answer, guess;
+
+function checkLetter() {
+    'use strict';
+    
+    guess = document.getElementById('userGuess').value;
+    
+    var i;
+    for (i = 0; i < answer.length; i += 1) {
+        if (guess === answer.charAt(i)) {
+            document.getElementById(i).value = guess;
+        }
+    }
+}
+
+
 
 // create game HTML elements
 function createGameHTML() {
     'use strict';
     
-    var i, letter, checkButton, userGuess;
+    var i, attr, letter, userGuess, checkButton;
     
-    for (i  = 1; i <= answer.length; i += 1) {
+    for (i  = 0; i < answer.length; i += 1) {
         letter = document.createElement('input');
         letter.type = 'text';
         letter.className = 'letter';
@@ -23,12 +38,21 @@ function createGameHTML() {
     userGuess = document.createElement('input');
     userGuess.type = 'text';
     userGuess.id = 'userGuess';
+    attr = document.createAttribute('maxlength');
+    attr.value = '1';
+    userGuess.setAttributeNode(attr);
+    userGuess.addEventListener('keyup', function (keyboard) {
+        if (keyboard.keyCode === 13) {
+            checkLetter();
+        }
+    });
     document.body.appendChild(userGuess);
     
     checkButton = document.createElement('input');
     checkButton.type = 'submit';
     checkButton.id = 'checkButton';
     checkButton.value = 'Survey Says...';
+    checkButton.addEventListener('click', checkLetter);
     document.body.appendChild(checkButton);
 }
 
@@ -36,7 +60,7 @@ function createGameHTML() {
 function prepareGame() {
     'use strict';
     
-    answer = document.getElementById('solutionWord').value;
+    answer = document.getElementById('solutionWord').value.toLowerCase();
     
     if (answer === '' || answer.includes(' ')) {
         answer = '';
