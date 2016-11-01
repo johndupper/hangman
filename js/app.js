@@ -33,7 +33,6 @@ function checkLetter() {
     }
     
     document.getElementById('userGuess').value = '';
-
     
     if (!letterPresent) {
         guessList.style.display = 'block';
@@ -44,7 +43,6 @@ function checkLetter() {
         declareWinner();
     }
 }
-
 
 
 // create game HTML elements
