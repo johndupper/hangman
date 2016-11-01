@@ -31,9 +31,8 @@ function checkLetter() {
             console.log(complete);
         }
     }
-<<<<<<< HEAD
+
     document.getElementById('userGuess').value = '';
-=======
     
     if (!letterPresent) {
         guessList.style.display = 'block';
@@ -43,7 +42,6 @@ function checkLetter() {
     if (complete === answer.length) {
         declareWinner();
     }
->>>>>>> development
 }
 
 
